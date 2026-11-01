@@ -1,18 +1,60 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Hero from '@/components/Hero';
 import ProductCard from '@/components/ProductCard';
-import { PRODUCTS } from '@/data/products';
-import { Sparkles, MessageCircle, Heart, CheckCircle2 } from 'lucide-react';
+import { PRODUCTS, Product } from '@/data/products';
+import { supabase } from '@/lib/supabaseClient';
+import { Sparkles, MessageCircle } from 'lucide-react';
 
 export default function Home() {
+  const [products, setProducts] = useState<Product[]>(PRODUCTS);
   const [selectedCategory, setSelectedCategory] = useState<string>('all');
+  const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    async function loadProductsFromSupabase() {
+      try {
+        setLoading(true);
+        const { data, error } = await supabase
+          .from('products')
+          .select('*')
+          .order('created_at', { ascending: false });
+
+        if (data && data.length > 0 && !error) {
+          // Map snake_case to camelCase
+          const formatted: Product[] = data.map((item) => ({
+            id: item.id,
+            name: item.name,
+            category: item.category,
+            categoryLabel: item.category_label,
+            price: Number(item.price),
+            rating: Number(item.rating || 5.0),
+            reviewsCount: Number(item.reviews_count || 1),
+            ambientImage: item.ambient_image,
+            studioImage: item.studio_image,
+            description: item.description,
+            dimensions: item.dimensions,
+            weight: item.weight,
+            colors: Array.isArray(item.colors) ? item.colors : [],
+            featured: item.featured
+          }));
+          setProducts(formatted);
+        }
+      } catch (err) {
+        console.error('Erro ao buscar produtos do Supabase:', err);
+      } finally {
+        setLoading(false);
+      }
+    }
+
+    loadProductsFromSupabase();
+  }, []);
 
   const filteredProducts =
     selectedCategory === 'all'
-      ? PRODUCTS
-      : PRODUCTS.filter((p) => p.category === selectedCategory);
+      ? products
+      : products.filter((p) => p.category === selectedCategory);
 
   const categories = [
     { id: 'all', label: 'Ver Todos os Produtos' },
