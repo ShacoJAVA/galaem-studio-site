@@ -1,6 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
-import { Box, Instagram, MessageCircle, MapPin } from 'lucide-react';
+import { Box, MessageCircle, MapPin, Heart } from 'lucide-react';
 
 export default function Footer() {
   return (
@@ -15,10 +15,10 @@ export default function Footer() {
                   <Box className="w-5 h-5 text-brand-orange" />
                 </div>
               </div>
-              <span className="text-xl font-black text-white">GALAEM 3D</span>
+              <span className="text-xl font-black text-white">GALAEM</span>
             </div>
             <p className="text-xs text-gray-400 leading-relaxed">
-              Estúdio de impressão 3D de alta precisão e modelagem paramétrica. Transformando polímeros e resinas em peças exclusivas para decoração e tecnologia.
+              Ateliê especializado em peças decorativas, luminárias modernas e presentes criativos com design autoral e acabamento feito à mão.
             </p>
             <div className="flex items-center gap-2 text-xs text-gray-400">
               <MapPin className="w-4 h-4 text-brand-orange" />
@@ -33,42 +33,42 @@ export default function Footer() {
             </h4>
             <ul className="space-y-2 text-xs text-gray-400">
               <li>
-                <Link href="#catalogo" className="hover:text-brand-orange transition-colors">
+                <Link href="#produtos" className="hover:text-brand-orange transition-colors">
                   Catálogo Completo
                 </Link>
               </li>
               <li>
-                <Link href="#categorias" className="hover:text-brand-orange transition-colors">
-                  Linha de Decoração
+                <Link href="#produtos" className="hover:text-brand-orange transition-colors">
+                  Decoração & Vasos
                 </Link>
               </li>
               <li>
-                <Link href="#sobre" className="hover:text-brand-orange transition-colors">
-                  Sobre a Manufatura
+                <Link href="#produtos" className="hover:text-brand-orange transition-colors">
+                  Bonecos & Articulados
                 </Link>
               </li>
               <li>
-                <Link href="#personalizados" className="hover:text-brand-orange transition-colors">
+                <Link href="#encomenda" className="hover:text-brand-orange transition-colors">
                   Peças Sob Encomenda
                 </Link>
               </li>
             </ul>
           </div>
 
-          {/* Materials */}
+          {/* Care & Delivery */}
           <div>
             <h4 className="text-xs font-bold text-white uppercase tracking-wider mb-4">
-              Materiais & Tecnologia
+              Envios & Pagamentos
             </h4>
             <ul className="space-y-2 text-xs text-gray-400">
-              <li>PLA Silk e Filamentos Especiais</li>
-              <li>Resina UV de Alta Definição</li>
-              <li>Modelagem 3D Paramétrica</li>
-              <li>Acabamento e Pintura Artesanal</li>
+              <li>Envio seguro para todo o Brasil</li>
+              <li>Pagamento via PIX com desconto</li>
+              <li>Parcelamento no cartão</li>
+              <li>Embalagens reforçadas para presente</li>
             </ul>
           </div>
 
-          {/* Contact */}
+          {/* Direct Support */}
           <div>
             <h4 className="text-xs font-bold text-white uppercase tracking-wider mb-4">
               Atendimento Direto
@@ -81,19 +81,21 @@ export default function Footer() {
                 className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-dark-bg border border-dark-border text-xs text-gray-200 hover:text-white hover:border-brand-orange transition-all"
               >
                 <MessageCircle className="w-4 h-4 text-emerald-400" />
-                <span>WhatsApp Oficial</span>
+                <span>Falar com o Ateliê no WhatsApp</span>
               </a>
               <p className="text-[11px] text-gray-500">
-                Segunda a sexta das 08h às 18h. Atendimento de encomendas e orçamentos personalizados.
+                Tire dúvidas sobre tamanhos, cores ou encomende uma peça especial com a gente!
               </p>
             </div>
           </div>
         </div>
 
         <div className="pt-12 mt-12 border-t border-dark-border/80 flex flex-col sm:flex-row items-center justify-between text-xs text-gray-500 gap-4">
-          <p>© {new Date().getFullYear()} GALAEM 3D Studio. Todos os direitos reservados.</p>
-          <p className="text-[11px] text-gray-600">
-            Parte do ecossistema GALAEM (GALAEM Flow & Gabriel Freitas Criação Digital).
+          <p>© {new Date().getFullYear()} GALAEM. Todos os direitos reservados.</p>
+          <p className="text-[11px] text-gray-600 flex items-center gap-1">
+            <span>Feito com</span>
+            <Heart className="w-3 h-3 text-brand-coral fill-brand-coral" />
+            <span>no Espírito Santo</span>
           </p>
         </div>
       </div>

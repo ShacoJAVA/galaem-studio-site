@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
-import { X, Star, ShoppingBag, Layers, Maximize2, Check } from 'lucide-react';
+import { X, Star, ShoppingBag, Truck, Heart } from 'lucide-react';
 import { useCart } from '@/context/CartContext';
 
 export default function ProductModal() {
@@ -35,7 +35,7 @@ export default function ProductModal() {
                 className="w-full h-full object-cover object-center transition-all duration-300"
               />
 
-              {/* View Toggle Badges */}
+              {/* View Toggle */}
               <div className="absolute bottom-3 left-3 right-3 flex gap-2">
                 <button
                   onClick={() => setActiveTab('ambient')}
@@ -45,7 +45,7 @@ export default function ProductModal() {
                       : 'bg-dark-bg/80 text-gray-300 hover:text-white border border-dark-border'
                   }`}
                 >
-                  Visão no Ambiente
+                  No Ambiente
                 </button>
                 <button
                   onClick={() => setActiveTab('studio')}
@@ -55,29 +55,25 @@ export default function ProductModal() {
                       : 'bg-dark-bg/80 text-gray-300 hover:text-white border border-dark-border'
                   }`}
                 >
-                  Estúdio 3D Isolado
+                  Visão em Detalhes
                 </button>
               </div>
             </div>
 
-            {/* Technical Specs Summary */}
-            <div className="grid grid-cols-3 gap-2 p-3 rounded-xl bg-dark-bg/60 border border-dark-border/80 text-center text-xs">
+            {/* Simple Dimensions Box */}
+            <div className="grid grid-cols-2 gap-3 p-3.5 rounded-xl bg-dark-bg/70 border border-dark-border text-center text-xs">
               <div>
-                <span className="text-[10px] text-gray-500 uppercase block">Altura</span>
-                <span className="font-bold text-white">{product.heightCm} cm</span>
+                <span className="text-[10px] text-gray-400 uppercase font-semibold block">Tamanho</span>
+                <span className="font-bold text-white">{product.dimensions}</span>
               </div>
               <div>
-                <span className="text-[10px] text-gray-500 uppercase block">Largura</span>
-                <span className="font-bold text-white">{product.widthCm} cm</span>
-              </div>
-              <div>
-                <span className="text-[10px] text-gray-500 uppercase block">Peso aprox.</span>
-                <span className="font-bold text-white">{product.weightG} g</span>
+                <span className="text-[10px] text-gray-400 uppercase font-semibold block">Peso Aproximado</span>
+                <span className="font-bold text-white">{product.weight}</span>
               </div>
             </div>
           </div>
 
-          {/* Product Details & Actions */}
+          {/* Details & Purchase */}
           <div className="space-y-6">
             <div>
               <span className="text-xs font-bold text-brand-amber uppercase tracking-wider">
@@ -92,7 +88,7 @@ export default function ProductModal() {
                   <Star className="w-4 h-4 fill-brand-amber" />
                 </div>
                 <span className="font-bold text-white">{product.rating.toFixed(1)}</span>
-                <span className="text-gray-500">({product.reviewsCount} avaliações de clientes)</span>
+                <span className="text-gray-500">({product.reviewsCount} clientes satisfeitos)</span>
               </div>
             </div>
 
@@ -100,26 +96,22 @@ export default function ProductModal() {
               {product.description}
             </p>
 
-            {/* Specifications */}
-            <div className="p-4 rounded-xl bg-dark-bg/80 border border-dark-border space-y-2.5 text-xs">
-              <div className="flex justify-between items-center">
-                <span className="text-gray-400">Material de Fabricação:</span>
-                <span className="font-bold text-white">{product.materialType}</span>
+            {/* Delivery & Care info */}
+            <div className="p-4 rounded-xl bg-dark-bg/80 border border-dark-border space-y-2.5 text-xs text-gray-300">
+              <div className="flex items-center gap-2 text-gray-200">
+                <Truck className="w-4 h-4 text-brand-orange" />
+                <span><strong>Produção sob encomenda:</strong> envio em 2 a 4 dias úteis.</span>
               </div>
-              <div className="flex justify-between items-center">
-                <span className="text-gray-400">Resolução da Camada:</span>
-                <span className="font-bold text-brand-orange">{product.layerResolution}</span>
-              </div>
-              <div className="flex justify-between items-center">
-                <span className="text-gray-400">Origem:</span>
-                <span className="font-bold text-gray-200">Modelado e Impresso no Brasil (ES)</span>
+              <div className="flex items-center gap-2 text-gray-200">
+                <Heart className="w-4 h-4 text-brand-coral" />
+                <span><strong>Cuidados:</strong> limpar com pano seco ou levemente úmido.</span>
               </div>
             </div>
 
             {/* Color selection */}
             <div>
               <span className="text-xs font-bold text-gray-300 block mb-2">
-                Cor selecionada: <strong className="text-brand-orange">{currentColor}</strong>
+                Escolha a cor da sua peça: <strong className="text-brand-orange">{currentColor}</strong>
               </span>
               <div className="flex flex-wrap gap-2">
                 {product.colors.map((c) => (
@@ -145,9 +137,12 @@ export default function ProductModal() {
             {/* Price and CTA */}
             <div className="pt-4 border-t border-dark-border flex items-center justify-between gap-4">
               <div>
-                <span className="text-xs text-gray-400 block">Preço</span>
+                <span className="text-xs text-gray-400 block">Valor à vista</span>
                 <span className="text-3xl font-black text-white">
                   R$ {product.price.toFixed(2).replace('.', ',')}
+                </span>
+                <span className="text-[11px] text-emerald-400 block font-semibold">
+                  no PIX ou parcelado no cartão
                 </span>
               </div>
 
